@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './search.css';
 
-const Search = () => {
-  const searchText = 'Type here for search';
-  const searchStyle = {
-    fontSize: '20px'
-  };
-  return(
+class Search extends Component {
+  constructor(){
+    super();
+    this.state= {
+      term: ''
+    }
+  }
+  onSearchChange =(e)=> {
+    this.setState({term: (e.target.value)});
+    this.props.onTermChange(e.target.value);
+  }
 
-    <input type="text"
-    className="form-control search-input"
-    style = {searchStyle}
-    placeholder = { searchText } />
-  );
+  render(){
+    const searchText = 'Type here for search';
+    const searchStyle = {
+      fontSize: '20px'
+    };
+    return(
+      <input type="text"
+      className="form-control search-input"
+      onChange={this.onSearchChange}
+      style = {searchStyle}
+      value ={this.state.term}
+      placeholder = { searchText } />
+    );
+  }
+
 };
 export default Search;
